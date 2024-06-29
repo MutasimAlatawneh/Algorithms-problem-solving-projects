@@ -1,0 +1,72 @@
+/*A sub-array of array is an array composed from a contiguous block of the original array's elements.
+
+In other words A sub-array A[i-j], where (1 ≤ i ≤ j ≤ N), is a sequence of integers Ai, Ai + 1, ..., Aj.
+
+For Example :
+
+IF array = [1,6,3,7] then the subarrays are [1] , [6] , [3] , [7] , [1,6] , [6,3],[3,7], [1,6,3] , [6,3,7] , [1,6,3,7] .
+
+Something like [1,3] would not be a sub-array as it's not a contiguous subsection of the original array.
+
+Given a number N and an array A of N numbers. Print the number of sub-arrays which are non-decreasing.
+
+Note:
+
+A sub-array A[i-j] is non-decreasing if (Ai  ≤  Ai + 1  ≤  Ai + 2  ≤  ...  ≤  Aj).
+*/
+
+
+
+/* solution : */
+#include <iostream>
+using namespace std;
+
+int countNonDecreasingSubarrays(int arr[], int n) {
+    int count = 0;
+    int length = 1;
+
+    for (int i = 0; i < n; i++) {
+        length = 1; // Each element itself is a non-decreasing sub-array
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] >= arr[j - 1]) {
+                length++;
+            } else {
+                break;
+            }
+        }
+        count += length; // Add the count of all non-decreasing sub-arrays starting from i
+    }
+    
+    return count;
+}
+int main()
+{
+    short t;
+    cin>>t;
+    unsigned short n;
+    while(t--){
+        cin>>n;
+        int arr[n];
+        for(int i=0;i<n;i++)
+        {
+            cin>>arr[i];
+        }
+        int count=0;
+        int lenght=1;
+        for(int i=0;i<n;i++){
+            lenght=1;
+            for(int j=i+1;j<n;j++){
+                if(arr[j]>=arr[j-1]){
+                lenght++;
+                }
+                else{
+                    break;
+                }
+            }
+          count+=lenght;
+
+        }
+        cout<<count<<endl;
+    }
+    return 0;
+}
